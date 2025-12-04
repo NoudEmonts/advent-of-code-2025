@@ -4,10 +4,11 @@
 package org.example
 
 import day1.Vault
+import day2.AnomalyDetection
 
 class App {}
 
 fun main() {
-    val day1 = Vault();
-    day1.solve("./src/main/kotlin/day1/input.txt");
+    val day2 = AnomalyDetection()
+    day2.solve("./src/main/kotlin/day2/input.txt")
 }
