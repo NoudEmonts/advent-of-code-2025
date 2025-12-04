@@ -9,5 +9,5 @@ class App {}
 
 fun main() {
     val day1 = Vault();
-    day1.solve();
+    day1.solve("./src/main/kotlin/day1/input.txt");
 }

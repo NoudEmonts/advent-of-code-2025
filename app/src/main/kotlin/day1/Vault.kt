@@ -1,7 +1,6 @@
 package day1
 
 import java.io.File
-import kotlin.math.abs
 
 data class VaultState(
     val dialVal: Int,
@@ -12,8 +11,8 @@ class Vault {
     var globalZeroCounter = 0;
     var vaultState = VaultState(50, 0);
 
-    fun solve(): Int {
-        val actions = File("./src/main/kotlin/day1/input.txt")
+    fun solve(path: String): Int {
+        val actions = File(path)
 
         actions.useLines { lines ->
             lines.forEach { action ->
@@ -29,9 +28,6 @@ class Vault {
                 globalZeroCounter += vaultState.zeroCounter
             }
         }
-
-        println("Vault cracked! \nWe hit zero - $globalZeroCounter times")
-
         return globalZeroCounter;
     }
 
@@ -48,39 +44,14 @@ class Vault {
         if (nextDialPos == 0) {
             zeroCounter++
         } else if (nextDialPos < 0) {
-            println(nextDialPos)
-            if(curDialPos == 0) {
+            zeroCounter+=(velocity-curDialPos)/100
+            if(curDialPos != 0) {
                 zeroCounter++
             }
-            println("increasing zero counter with ${(velocity - curDialPos)/100 + 1}")
-            zeroCounter+=(velocity-curDialPos)/100 + 1
         }
-        return VaultState(abs(nextDialPos % 100), zeroCounter);
+
+        val resetDialPos = ((nextDialPos % 100) + 100) % 100
+
+        return VaultState(resetDialPos, zeroCounter);
     }
-//
-//    fun determineZeroHits(currentDialVal: Int, nextDialVal: Int): Int {
-//        val havePassedZero =
-//            (currentDialVal > 0 && nextDialVal < 0) ||
-//                    (currentDialVal < 0 && nextDialVal > 0)
-//
-//        var hits = 0;
-//        if (havePassedZero) {
-//            hits = 1 + abs(currentDialVal / 100) + abs(nextDialVal / 100)
-//            if (currentDialVal % 100 == 0) {
-//                hits--;
-//            }
-//        } else {
-//            if (nextDialVal == 0) {
-//                abs(currentDialVal / 100) + 1
-//            } else {
-//                abs(nextDialVal / 100 - currentDialVal / 100)
-//            }
-//
-//        }
-//        if (currentDialVal % 100 == 0) {
-//            hits--;
-//        }
-//
-//        return hits
-//    }
 }
