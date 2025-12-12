@@ -3,11 +3,13 @@
  */
 package org.example
 
-import day2.AnomalyDetection
+import day3.Batteries
 
 class App
 
 fun main() {
-  val day2 = AnomalyDetection()
-  day2.solve("./src/main/kotlin/day2/input.txt")
+  val day3 = Batteries("./src/main/kotlin/day3/input.txt")
+  val result = day3.solve()
+
+  print(result)
 }
