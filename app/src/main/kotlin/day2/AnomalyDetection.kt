@@ -3,32 +3,32 @@ package day2
 import java.io.File
 
 class AnomalyDetection {
+  fun solve(path: String): Long {
+    val ranges = File(path).readText().split(",")
+    var sum: Long = 0
+    for (range in ranges) {
+      val (from, to) = range.split("-").map(String::toLong)
 
-    fun solve(path: String): Long {
-        val ranges = File(path).readText().split(",")
-        var sum: Long = 0;
-        for (range in ranges) {
-            val (from, to) = range
-                .split("-")
-                .map(String::toLong)
-
-            sum += sumRepeatingIDs(from, to)
-        }
-
-        print("Total: $sum")
-        return sum
+      sum += sumRepeatingIDs(from, to)
     }
 
-    fun sumRepeatingIDs(from: Long, to: Long): Long {
-        val regex = Regex("""^(\d*)\1+$""")
-        var sum: Long = 0;
+    print("Total: $sum")
+    return sum
+  }
 
-        for (id in from..to) {
-            if(id.toString().matches(regex)){
-                sum += id
-            }
-        }
+  fun sumRepeatingIDs(
+      from: Long,
+      to: Long,
+  ): Long {
+    val regex = Regex("""^(\d*)\1+$""")
+    var sum: Long = 0
 
-        return sum
+    for (id in from..to) {
+      if (id.toString().matches(regex)) {
+        sum += id
+      }
     }
+
+    return sum
+  }
 }

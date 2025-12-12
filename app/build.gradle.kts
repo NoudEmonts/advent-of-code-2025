@@ -11,6 +11,16 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+
+    id("com.diffplug.spotless") version "8.1.0"
+}
+
+spotless {
+    kotlin {
+        ktlint()
+        target("src/**/*.kt")
+        ktfmt()
+    }
 }
 
 repositories {
