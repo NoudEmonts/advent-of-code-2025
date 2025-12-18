@@ -9,7 +9,7 @@ class App
 
 fun main() {
   val day3 = Batteries("./src/main/kotlin/day3/input.txt")
-  val result = day3.solve()
+  val result = day3.solve(12)
 
   print(result)
 }

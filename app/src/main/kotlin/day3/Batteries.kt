@@ -11,27 +11,28 @@ class Batteries(
           .map { line -> line.map { char -> char.digitToInt() }.toIntArray() }
           .toTypedArray()
 
-  fun solve(): Int {
-    val maxJoltages = batteryBank.map { bank -> determineMaximumJoltage(bank) }
+  fun solve(nrBatteries: Int): Long {
+    val maxJoltages = batteryBank.map { bank -> determineMaximumJoltage(bank, nrBatteries) }
     return maxJoltages.sum()
   }
 
   companion object {
-    fun determineMaximumJoltage(bank: IntArray): Int {
-      var max1 = bank.withIndex().maxBy { it.value }
-      var max2: Int
+    fun determineMaximumJoltage(
+        bank: IntArray,
+        nrBatteries: Int,
+    ): Long {
+      val maxJoltages = ArrayList<Int>(nrBatteries)
+      var idxMin = 0
+      for (idxMax in (bank.size - nrBatteries + 1) until bank.size + 1) {
+        val subset = bank.sliceArray(idxMin until idxMax)
 
-      if (max1.index >= bank.lastIndex) {
-        max2 = max1.value
+        val max = subset.withIndex().maxBy { it.value }
 
-        val subset = bank.sliceArray(0 until bank.lastIndex)
-        max1 = subset.withIndex().maxBy { it.value }
-      } else {
-        val subset = bank.sliceArray(max1.index + 1 until bank.lastIndex + 1)
-        max2 = subset.max()
+        maxJoltages.add(max.value)
+        idxMin += max.index + 1
       }
 
-      return "${max1.value}$max2".toInt()
+      return maxJoltages.joinToString("").toLong()
     }
   }
 }
