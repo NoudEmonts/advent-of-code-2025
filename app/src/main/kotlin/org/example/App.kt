@@ -4,12 +4,13 @@
 package org.example
 
 import day3.Batteries
+import day4.PaperGrid
 
 class App
 
 fun main() {
-  val day3 = Batteries("./src/main/kotlin/day3/input.txt")
-  val result = day3.solve(12)
+  val day4 = PaperGrid("./src/main/kotlin/day4/input.txt")
+  val result = day4.solve()
 
   print(result)
 }
